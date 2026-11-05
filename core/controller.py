@@ -1,5 +1,5 @@
 """
-GesturePPT – platform-aware slide controller.
+PresentoVision – platform-aware slide controller.
 
 Keyboard shortcuts work universally across:
   PowerPoint · Canva · Google Slides · Keynote
@@ -8,8 +8,9 @@ Keyboard shortcuts work universally across:
 
 import os
 import time
-import pyautogui
 from datetime import datetime
+
+import pyautogui
 
 from config.settings import SYSTEM, SCREENSHOTS_DIR
 
@@ -31,6 +32,7 @@ class SlideController:
 
     @staticmethod
     def screenshot() -> str:
+        os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
         ts   = datetime.now().strftime("%Y%m%d_%H%M%S")
         path = os.path.join(SCREENSHOTS_DIR, f"slide_{ts}.png")
         pyautogui.screenshot(path)
@@ -38,9 +40,7 @@ class SlideController:
 
     @staticmethod
     def enter_fullscreen():
-        if SYSTEM == "Windows":
-            pyautogui.press("f5")
-        elif SYSTEM == "Darwin":
+        if SYSTEM == "Darwin":
             pyautogui.hotkey("ctrl", "shift", "f")
         else:
             pyautogui.press("f5")

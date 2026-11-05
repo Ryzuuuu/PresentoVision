@@ -1,5 +1,5 @@
 """
-GesturePPT – HUD color palette and font handles.
+PresentoVision – HUD color palette and font handles.
 All BGR tuples; import after cv2 is available.
 """
 
@@ -16,18 +16,18 @@ C_MAGENTA = (210, 60,  200)
 C_WHITE   = (240, 240, 240)
 C_GRAY    = (100, 100, 115)
 C_DARK    = (35,  35,  50)
-C_ORANGE  = (30,  160, 255)
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
 FONT      = cv2.FONT_HERSHEY_SIMPLEX
 FONT_MONO = cv2.FONT_HERSHEY_DUPLEX
 
-# ── Gesture guide rows: (symbol, description, color) ─────────────────────────
+# ── Gesture guide rows: (gesture, action, color) ─────────────────────────────
+# ASCII only: OpenCV's Hershey fonts cannot render emoji or arrows (they show as "?").
 GESTURE_GUIDE = [
-    ("🖐  Palm  (Right)",  "Next Slide  →",    C_GREEN),
-    ("🖐  Palm  (Left)",   "Prev Slide  ←",    C_BLUE),
-    ("✊  Fist",           "Pause / Auto",      C_RED),
-    ("☝  One Finger",     "Screenshot  📸",    C_GOLD),
-    ("✌  Two Fingers",    "Fullscreen  ⇄",     C_CYAN),
-    ("🤟  Three Fingers",  "Quit App",          C_MAGENTA),
+    ("Open Palm (Right)", "Next Slide  ->", C_GREEN),
+    ("Open Palm (Left)",  "Prev Slide  <-", C_BLUE),
+    ("Fist",              "Pause / Play",   C_RED),
+    ("One Finger",        "Screenshot",     C_GOLD),
+    ("Two Fingers",       "Fullscreen",     C_CYAN),
+    ("Three Fingers",     "Quit App",       C_MAGENTA),
 ]

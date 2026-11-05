@@ -1,9 +1,10 @@
 """
-GesturePPT – gesture smoothing.
+PresentoVision – gesture smoothing.
 Majority-vote over a sliding window to suppress single-frame noise.
 """
 
-from collections import deque
+from collections import Counter, deque
+
 from config.settings import CONFIRM_FRAMES
 from core.gesture import Gesture
 
@@ -23,11 +24,7 @@ class GestureBuffer:
         if len(self._buf) < self._window:
             return Gesture.NONE
 
-        counts: dict = {}
-        for g in self._buf:
-            counts[g] = counts.get(g, 0) + 1
-
-        winner, count = max(counts.items(), key=lambda x: x[1])
+        winner, count = Counter(self._buf).most_common(1)[0]
         threshold = self._window // 2 + 1
         return winner if count >= threshold else Gesture.NONE
 

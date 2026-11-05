@@ -1,16 +1,17 @@
 """
-GesturePPT – HUD renderer.
+PresentoVision – HUD renderer.
 All OpenCV drawing lives here; no business logic.
 """
 
 import time
+
 import cv2
 import numpy as np
 
 from config.settings import COOLDOWN_SEC
 from config.theme import (
     C_PANEL, C_GREEN, C_RED, C_BLUE, C_GOLD, C_CYAN,
-    C_MAGENTA, C_WHITE, C_GRAY, C_DARK, C_ORANGE,
+    C_WHITE, C_GRAY, C_DARK,
     FONT, FONT_MONO, GESTURE_GUIDE,
 )
 
@@ -48,7 +49,7 @@ def draw(
     y = 38
 
     # Title block
-    cv2.putText(frame, "GesturePPT", (14, y), FONT_MONO, 0.95, C_CYAN, 2, cv2.LINE_AA)
+    cv2.putText(frame, "PresentoVision", (14, y), FONT_MONO, 0.95, C_CYAN, 2, cv2.LINE_AA)
     y += 22
     _label(frame, "YOLOv8n  +  MediaPipe", 14, y, scale=0.37, color=C_GRAY)
     y += 18
@@ -64,8 +65,8 @@ def draw(
     y += 24
 
     # Raw / confirmed gesture
-    raw_g  = state.get("raw_gesture",  "—")
-    conf_g = state.get("conf_gesture", "—")
+    raw_g  = state.get("raw_gesture",  "-")
+    conf_g = state.get("conf_gesture", "-")
     _label(frame, "RAW :", 14, y, color=C_GRAY)
     _label(frame, raw_g,   70, y, color=C_WHITE)
     y += 20
@@ -79,7 +80,7 @@ def draw(
     y += 14
 
     # Last action (wrapped)
-    action_txt = state.get("last_action", "Ready — show a hand gesture")
+    action_txt = state.get("last_action", "Ready - show a hand gesture")
     act_col    = C_GOLD if flash else C_WHITE
     _label(frame, "ACTION", 14, y, color=C_GRAY, scale=0.39)
     y += 17
@@ -89,7 +90,8 @@ def draw(
         if len(line) + len(wd) + 1 <= 25:
             line += (" " if line else "") + wd
         else:
-            lines.append(line); line = wd
+            lines.append(line)
+            line = wd
     lines.append(line)
     for ln in lines[:2]:
         cv2.putText(frame, ln, (14, y), FONT, 0.54, act_col, 1, cv2.LINE_AA)
@@ -118,8 +120,8 @@ def draw(
     _label(frame, "GESTURE GUIDE", 14, y, color=C_CYAN, scale=0.40)
     y += 17
     for sym, desc, col in GESTURE_GUIDE:
-        _label(frame, sym,  14,  y, color=col,   scale=0.37)
-        _label(frame, desc, 155, y, color=C_WHITE, scale=0.37)
+        _label(frame, sym,  14,  y, color=col,     scale=0.37)
+        _label(frame, desc, 165, y, color=C_WHITE, scale=0.37)
         y += 17
 
     # Cooldown bar (bottom of panel)

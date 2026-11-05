@@ -1,10 +1,11 @@
 """
-GesturePPT – keep the overlay window always on top.
+PresentoVision – keep the overlay window always on top.
 Re-called every ~1.5 s because some window managers steal focus back.
 """
 
 import subprocess
 from typing import Optional
+
 import cv2
 
 from config.settings import WIN_NAME, SYSTEM
@@ -31,26 +32,36 @@ class TopMost:
     @classmethod
     def _enforce_windows(cls):
         try:
-            import win32gui, win32con
-            if cls._hwnd is None:
-                cls._hwnd = win32gui.FindWindow(None, WIN_NAME)
-            if cls._hwnd:
+            import win32con
+            import win32gui
+        except ImportError:
+            return
+
+        if cls._hwnd is None:
+            cls._hwnd = win32gui.FindWindow(None, WIN_NAME)
+        if cls._hwnd:
+            try:
                 win32gui.SetWindowPos(
                     cls._hwnd,
                     win32con.HWND_TOPMOST,
                     0, 0, 0, 0,
                     win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_NOACTIVATE,
                 )
-        except ImportError:
-            pass
+            except Exception:
+                # Stale handle (window recreated/closed): look it up again next time.
+                cls._hwnd = None
 
     @classmethod
     def _enforce_linux(cls):
+        # subprocess.run (not Popen) so finished wmctrl processes are reaped
+        # instead of piling up as zombies every 1.5 s.
         try:
-            subprocess.Popen(
+            subprocess.run(
                 ["wmctrl", "-r", WIN_NAME, "-b", "add,above"],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
+                timeout=1,
+                check=False,
             )
-        except FileNotFoundError:
+        except (FileNotFoundError, subprocess.TimeoutExpired):
             pass

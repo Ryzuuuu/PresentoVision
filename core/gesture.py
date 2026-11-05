@@ -1,16 +1,14 @@
 """
-GesturePPT – gesture recognition layer.
+PresentoVision – gesture recognition layer.
 
-Gesture map (updated):
-  OPEN_PALM  + Right hand  →  Next Slide
-  OPEN_PALM  + Left hand   →  Prev Slide
-  FIST                     →  Pause / Autoplay toggle
-  ONE_FINGER (index only)  →  Screenshot
-  PEACE      (index+mid)   →  Fullscreen toggle
-  THREE_FINGERS            →  Quit App
+Gesture map:
+  OPEN_PALM  + Right hand  ->  Next Slide
+  OPEN_PALM  + Left hand   ->  Prev Slide
+  FIST                     ->  Pause / Autoplay toggle
+  ONE_FINGER (index only)  ->  Screenshot
+  PEACE      (index+mid)   ->  Fullscreen toggle
+  THREE_FINGERS            ->  Quit App
 """
-
-import numpy as np
 
 
 class FingerState:
@@ -39,30 +37,30 @@ class Gesture:
     """Gesture label constants + classifier."""
 
     NONE          = "NONE"
-    ONE_FINGER    = "ONE_FINGER"     # ☝  index only
-    PEACE         = "PEACE"          # ✌  index + middle
-    THREE_FINGERS = "THREE_FINGERS"  # 🤟 index + middle + ring
-    FIST          = "FIST"           # ✊ all folded
-    OPEN_PALM     = "OPEN_PALM"      # 🖐 all extended
+    ONE_FINGER    = "ONE_FINGER"     # index only
+    PEACE         = "PEACE"          # index + middle
+    THREE_FINGERS = "THREE_FINGERS"  # index + middle + ring
+    FIST          = "FIST"           # all folded
+    OPEN_PALM     = "OPEN_PALM"      # all extended
 
     @staticmethod
     def classify(states: list) -> str:
-        t, i, m, r, p = states
+        _thumb, index, middle, ring, pinky = states
 
         # Order matters: check most-constrained patterns first
         if not any(states):
             return Gesture.FIST
-        
+
         if all(states):
             return Gesture.OPEN_PALM
 
-        if i and not m and not r and not p:
+        if index and not middle and not ring and not pinky:
             return Gesture.ONE_FINGER        # thumb state irrelevant
 
-        if i and m and not r and not p:
+        if index and middle and not ring and not pinky:
             return Gesture.PEACE
 
-        if i and m and r and not p:
+        if index and middle and ring and not pinky:
             return Gesture.THREE_FINGERS
 
         return Gesture.NONE
