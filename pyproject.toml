@@ -1,0 +1,12 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# Column-aligned assignments and import blocks are kept as written.
+ignore = ["E221", "E241", "E272", "E701", "E702", "I001"]
