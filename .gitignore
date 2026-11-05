@@ -1,4 +1,27 @@
-yolov8n.pt
+# Python
 __pycache__/
-.vscode/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments
 venv/
+.venv/
+env/
+
+# Model weights and training output (downloaded automatically on first run)
+*.pt
+*.onnx
+runs/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local secrets and screenshots
+.env
+GesturePPT_Shots/
+PresentoVision_Shots/

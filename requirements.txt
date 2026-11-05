@@ -1,6 +1,7 @@
-opencv-python>=4.9
-mediapipe>=0.10
+opencv-python>=4.9,<5
+# MediaPipe 0.10.30+ removed the legacy `mp.solutions` API this project uses.
+mediapipe>=0.10.9,<0.10.30
 ultralytics>=8.2
 pyautogui>=0.9
-numpy>=1.24
+numpy>=1.24,<2
 pywin32>=306 ; sys_platform == "win32"
