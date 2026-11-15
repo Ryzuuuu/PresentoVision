@@ -6,9 +6,7 @@
 
 Control a slide deck with your hand. PresentoVision reads your webcam, tracks a hand with **MediaPipe** (21 landmarks, in real time), and turns simple gestures into keyboard shortcuts for whatever presentation app is in focus: PowerPoint, Google Slides, Canva, Keynote, LibreOffice Impress or a PDF viewer. A small always-on-top overlay shows what the system sees, and **YOLOv8n** adds person detection as scene context.
 
-<!-- TODO: add a demo GIF here, e.g. docs/demo.gif
-![PresentoVision demo](docs/demo.gif)
--->
+![Hand gestures in front of a webcam change slides: right palm for next, left palm for previous, fist to pause, two fingers for fullscreen](docs/demo.svg)
 
 ## Features
 

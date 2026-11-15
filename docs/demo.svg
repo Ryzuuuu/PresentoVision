@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="860" height="380" role="img" aria-label="Illustration: hand gestures in front of a webcam change slides. Right palm goes to the next slide, left palm goes back, a fist pauses, two fingers toggles fullscreen.">
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .step { opacity: 0; animation: 12s linear infinite; }
+    .s1 { animation-name: a1; } .s2 { animation-name: a2; }
+    .s3 { animation-name: a3; } .s4 { animation-name: a4; }
+    @keyframes a1 { 0%,23% {opacity:1} 25%,100% {opacity:0} }
+    @keyframes a2 { 0%,23% {opacity:0} 25%,48% {opacity:1} 50%,100% {opacity:0} }
+    @keyframes a3 { 0%,48% {opacity:0} 50%,73% {opacity:1} 75%,100% {opacity:0} }
+    @keyframes a4 { 0%,73% {opacity:0} 75%,98% {opacity:1} 100% {opacity:0} }
+    .pulse { animation: p 3s ease-out infinite; transform-origin: 210px 170px; }
+    @keyframes p { 0% {transform:scale(.85); opacity:.9} 60%,100% {transform:scale(1.25); opacity:0} }
+    .label { fill:#94a3b8; font-size:13px; letter-spacing:1.5px; }
+    .cap { fill:#e2e8f0; font-size:20px; font-weight:600; }
+    .sub { fill:#94a3b8; font-size:14px; }
+    .slideT { fill:#0f172a; font-size:26px; font-weight:700; }
+    .slideS { fill:#475569; font-size:14px; }
+    .tag { fill:#ffffff; font-size:14px; font-weight:700; }
+  </style>
+
+  <rect width="860" height="380" rx="14" fill="#0f172a"/>
+
+  <!-- webcam panel -->
+  <text x="40" y="42" class="label">WEBCAM</text>
+  <rect x="40" y="56" width="340" height="230" rx="10" fill="#1e293b" stroke="#334155"/>
+  <circle cx="360" cy="74" r="5" fill="#ef4444"/>
+  <circle class="pulse" cx="210" cy="170" r="70" fill="none" stroke="#22d3ee" stroke-width="3"/>
+
+  <!-- arrow -->
+  <path d="M398 170 H452" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
+  <path d="M446 162 L456 170 L446 178" fill="none" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- slides panel -->
+  <text x="480" y="42" class="label">YOUR SLIDES</text>
+  <rect x="480" y="56" width="340" height="230" rx="10" fill="#1e293b" stroke="#334155"/>
+
+  <!-- step 1: right palm, next slide -->
+  <g class="step s1">
+    <text x="210" y="205" font-size="96" text-anchor="middle">✋</text>
+    <rect x="500" y="76" width="300" height="190" rx="6" fill="#f8fafc"/>
+    <text x="520" y="150" class="slideT">Slide 2</text>
+    <text x="520" y="178" class="slideS">Results</text>
+    <rect x="690" y="226" width="100" height="28" rx="14" fill="#6d28d9"/>
+    <text x="740" y="245" class="tag" text-anchor="middle">NEXT ▶</text>
+    <text x="40" y="326" class="cap">Right palm</text>
+    <text x="40" y="350" class="sub">Next slide</text>
+  </g>
+
+  <!-- step 2: left palm, previous slide -->
+  <g class="step s2">
+    <text x="210" y="205" font-size="96" text-anchor="middle" transform="translate(420 0) scale(-1 1)">✋</text>
+    <rect x="500" y="76" width="300" height="190" rx="6" fill="#f8fafc"/>
+    <text x="520" y="150" class="slideT">Slide 1</text>
+    <text x="520" y="178" class="slideS">Introduction</text>
+    <rect x="510" y="226" width="130" height="28" rx="14" fill="#6d28d9"/>
+    <text x="575" y="245" class="tag" text-anchor="middle">◀ PREVIOUS</text>
+    <text x="40" y="326" class="cap">Left palm</text>
+    <text x="40" y="350" class="sub">Previous slide</text>
+  </g>
+
+  <!-- step 3: fist, pause -->
+  <g class="step s3">
+    <text x="210" y="205" font-size="96" text-anchor="middle">✊</text>
+    <rect x="500" y="76" width="300" height="190" rx="6" fill="#f8fafc"/>
+    <text x="520" y="150" class="slideT">Slide 1</text>
+    <text x="520" y="178" class="slideS">Introduction</text>
+    <rect x="690" y="226" width="100" height="28" rx="14" fill="#0ea5e9"/>
+    <text x="740" y="245" class="tag" text-anchor="middle">PAUSED</text>
+    <text x="40" y="326" class="cap">Fist</text>
+    <text x="40" y="350" class="sub">Pause or resume</text>
+  </g>
+
+  <!-- step 4: two fingers, fullscreen -->
+  <g class="step s4">
+    <text x="210" y="205" font-size="96" text-anchor="middle">✌️</text>
+    <rect x="484" y="60" width="332" height="222" rx="8" fill="#f8fafc"/>
+    <text x="508" y="150" class="slideT">Slide 1</text>
+    <text x="508" y="178" class="slideS">Introduction</text>
+    <rect x="676" y="240" width="128" height="28" rx="14" fill="#0ea5e9"/>
+    <text x="740" y="259" class="tag" text-anchor="middle">FULLSCREEN</text>
+    <text x="40" y="326" class="cap">Two fingers</text>
+    <text x="40" y="350" class="sub">Fullscreen on or off</text>
+  </g>
+
+  <text x="820" y="350" class="sub" text-anchor="end">Illustration of the gesture controls</text>
+</svg>
